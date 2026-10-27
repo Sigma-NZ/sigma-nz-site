@@ -81,9 +81,9 @@ h1{font-size:clamp(40px,4.8vw,64px);line-height:1.06;font-weight:700;letter-spac
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding-top:4px}
 .text-link{font-size:16px;font-weight:600;color:#FFFFFF}
 .note{font-size:15px;color:var(--muted)}
-.mark-panel{flex:1 1 400px;min-width:0;height:420px;border-radius:24px;background-color:var(--panel);background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:40px 40px;border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px;text-align:center}
-.mark-panel svg{width:200px;height:200px}
-.mark-caption{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FFFFFF}
+.mark-panel{position:relative;overflow:hidden;flex:1 1 400px;min-width:0;height:420px;border-radius:24px;background-color:var(--panel);background-image:radial-gradient(rgba(255,255,255,.07) 1.2px,transparent 1.7px);background-size:22px 22px;border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 24px 28px;text-align:center}
+.mark-panel .art{position:absolute;inset:0;width:100%;height:100%}
+.mark-caption{position:relative;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FFFFFF}
 
 /* Cards */
 .cards{display:flex;flex-wrap:wrap;gap:24px}
@@ -156,8 +156,9 @@ select option{color:var(--on-accent);background:#FFFFFF}
   .nav-link{display:none}
   .brand-word{font-size:22px}
   .bar{padding-left:16px}
-  .mark-panel{height:300px}
-  .mark-panel svg{width:140px;height:140px}
+  .mark-panel{height:300px;padding-bottom:22px}
+  .mark-panel .art{height:calc(100% - 40px)}
+  .mark-caption{font-size:12px;letter-spacing:.12em;line-height:1.6;text-wrap:balance}
   .fields{grid-template-columns:minmax(0,1fr)}
 }
 
