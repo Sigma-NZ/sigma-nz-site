@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sigma-nz.com/sitemap.xml
