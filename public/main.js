@@ -3,7 +3,7 @@
   'use strict';
 
   // Web3Forms access key. It is designed to be public; it only lets the form deliver to our inbox.
-  var ACCESS_KEY = 'WEB3FORMS_ACCESS_KEY';
+  var ACCESS_KEY = '21e7ee45-4180-4620-8a63-5c793c8844e2';
   var ENDPOINT = 'https://api.web3forms.com/submit';
   var CONTACT = 'john@sigma-nz.com';
 
