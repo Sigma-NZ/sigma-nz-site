@@ -1,0 +1,14 @@
+{
+  "name": "Sigma NZ",
+  "short_name": "Sigma NZ",
+  "description": "Invitation-only technology appraisal and AI automation advisory for New Zealand business owners.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0B2E33",
+  "theme_color": "#0B2E33",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-mask.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
