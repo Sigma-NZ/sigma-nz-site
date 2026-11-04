@@ -11,3 +11,7 @@ Static site for Sigma NZ, hosted on Cloudflare Pages.
 ## Tagging links in outreach
 
 Add `?ref=<company-slug>` to any link sent to a prospect, for example `https://sigma-nz.com/?ref=acme-engineering`. If they request an invitation, the ref arrives with their details.
+
+## Changing styles or scripts
+
+Pages link `/styles.css?v=…` and `/main.js?v=…`. Bump the `v` value in every page whenever either file changes, so browsers fetch the new copy instead of a saved one.
