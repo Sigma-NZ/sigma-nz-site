@@ -6,7 +6,7 @@ Static site for Sigma NZ, hosted on Cloudflare Pages.
 - Every push to `main` deploys automatically.
 - `public/_headers` holds the security headers (HSTS, CSP and others). Any new third-party script or form endpoint must be added to the CSP there, or the browser will block it.
 - `public/main.js` handles the invitation form (Web3Forms) and saves `?ref=` and `utm_*` link tags with each request.
-- Fonts are self-hosted (Plus Jakarta Sans, SIL Open Font License, see `public/fonts/OFL.txt`), so no visitor data goes to Google Fonts.
+- Fonts are self-hosted, so no visitor data goes to Google Fonts: Inter Tight for headings, Inter for body text, Plus Jakarta Sans for the logo wordmark. All are under the SIL Open Font License (see the `OFL*.txt` files in `public/fonts/`).
 
 ## Tagging links in outreach
 
