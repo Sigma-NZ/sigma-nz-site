@@ -164,6 +164,7 @@ select option{color:var(--on-accent);background:#FFFFFF}
 .updated{color:var(--muted);font-size:15px}
 
 @media (max-width:640px){
+  .pill-intro{display:none}
   .nav-link{display:none}
   .brand{font-size:22px}
   .bar{padding-left:16px}
