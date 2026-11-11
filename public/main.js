@@ -304,7 +304,7 @@
         })
         .then(function () {
           button.disabled = false;
-          button.textContent = 'Request an invitation';
+          button.textContent = 'Apply';
         });
     });
   }
