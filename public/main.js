@@ -290,6 +290,8 @@
         .then(function (ok) {
           if (ok) {
             form.hidden = true;
+            var dlg = document.getElementById('invite');
+            if (dlg) dlg.classList.add('is-done');
             done.hidden = false;
             done.focus();
             try { sessionStorage.removeItem(STORE_KEY); } catch (e) { /* ignore */ }

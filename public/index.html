@@ -64,8 +64,8 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="/styles.css?v=20261117">
-<script src="/main.js?v=20261117" defer></script>
+<link rel="stylesheet" href="/styles.css?v=20261118">
+<script src="/main.js?v=20261118" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -198,8 +198,9 @@
 <dialog class="invite-dialog" id="invite" aria-labelledby="invite-title">
   <div class="invite-panel">
     <div class="invite-copy">
+      <svg class="dlg-mark" viewBox="0 0 40 39.4" aria-hidden="true"><path d="M10 0H34.9A4.9 4.9 0 0 1 34.9 9.8H22A6 6 0 0 0 16 15.8V19.5A2.5 2.5 0 0 1 13.5 22H9A9 9 0 0 1 0 13V10A10 10 0 0 1 10 0Z" fill="#FFFFFF"/><path d="M1.2 27.1H18.8V32.9A6.5 6.5 0 0 1 12.3 39.4H8A8 8 0 0 1 0 31.4V28.3A1.2 1.2 0 0 1 1.2 27.1Z" fill="#FFFFFF"/><path d="M24.9 14.2H30.5A9.5 9.5 0 0 1 40 23.7V29.4A10 10 0 0 1 30 39.4H18.1Q20.9 38.6 20.9 31.6V18.2A4 4 0 0 1 24.9 14.2Z" fill="#2A9DAA"/></svg>
       <h2 id="invite-title" tabindex="-1" autofocus>Request an invitation</h2>
-      <p>Tell us a little about your business. If there’s a fit, we’ll be in touch personally.</p>
+      <p>If there’s a fit, we’ll be in touch personally.</p>
     </div>
     <div class="invite-body">
       <form id="invite-form" novalidate>
@@ -262,15 +263,14 @@
         <input type="hidden" name="utm_campaign">
         <input type="hidden" name="utm_content">
         <input type="hidden" name="utm_term">
+        <p class="status" id="form-status" role="status" aria-live="polite"></p>
         <div class="form-foot">
           <div class="form-nav">
             <button class="btn btn-lg btn-ghost" type="button" data-back hidden>Back</button>
             <button class="btn btn-lg" type="button" data-next hidden>Next</button>
             <button class="btn btn-lg" type="submit">Request an invitation</button>
           </div>
-          <p class="fine">We use these details only to reply to you, and nothing is sent until you press the final button. Read our <a href="/privacy">privacy statement</a>.</p>
         </div>
-        <p class="status" id="form-status" role="status" aria-live="polite"></p>
       </form>
       <div class="done" id="form-done" hidden tabindex="-1">
         <h3>Thank you. Your request is in.</h3>

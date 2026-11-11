@@ -142,17 +142,19 @@ h1{font-size:clamp(40px,4.8vw,64px);line-height:1.06;font-weight:600;letter-spac
 }
 
 /* Invitation */
-.invite-dialog{box-sizing:border-box;width:min(960px,calc(100vw - 24px));max-width:none;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);margin:auto;padding:0;overflow:auto;overscroll-behavior:contain;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.invite-dialog{box-sizing:border-box;width:min(560px,calc(100vw - 24px));max-width:none;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);margin:auto;padding:0;overflow:auto;overscroll-behavior:contain;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .invite-dialog::backdrop{background:rgba(3,10,16,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-.invite-panel{padding:clamp(28px,5vw,64px);display:flex;flex-wrap:wrap;gap:32px 56px;align-items:flex-start}
+.invite-panel{padding:clamp(28px,5vw,44px);display:flex;flex-direction:column;gap:28px}
 #invite-title:focus{outline:none}
-.dialog-close{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;color:#FFFFFF;background:rgba(255,255,255,.06);border:1px solid var(--line-strong);border-radius:12px;cursor:pointer;transition:background-color .15s ease}
+.dialog-close{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;color:#FFFFFF;background:rgba(255,255,255,.06);border:1px solid var(--line-strong);border-radius:12px;cursor:pointer;transition:background-color .15s ease}
 .dialog-close:hover{background:rgba(255,255,255,.16)}
 .dialog-close svg{width:20px;height:20px}
 html.dialog-open{overflow:hidden}
-.invite-copy{flex:1 1 260px;padding-right:44px;min-width:0;display:flex;flex-direction:column;gap:14px}
-.invite-copy p{font-size:18px;color:#F2F8F8}
-.invite-body{flex:999 1 440px;min-width:0}
+.invite-copy{display:flex;flex-direction:column;gap:6px;padding-right:56px}
+.dlg-mark{width:30px;height:auto;margin-bottom:14px}
+.invite-copy h2{font-size:26px;line-height:1.2;letter-spacing:-.02em}
+.invite-copy p{font-size:13px;line-height:1.5;color:var(--muted)}
+.invite-body{width:100%;min-width:0}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field-full{grid-column:1 / -1}
@@ -166,17 +168,21 @@ select option{color:var(--on-accent);background:#FFFFFF}
 .pane{margin:0;padding:0;border:0;min-width:0}
 .pane+.pane{margin-top:18px}
 .is-steps .pane+.pane{margin-top:0}
-.is-steps .pane{min-height:230px}
-.progress{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
-.progress-label{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.progress-bars{display:flex;gap:6px}
-.progress-bars span{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);transition:background-color .3s ease}
+.is-steps .pane{min-height:176px}
+.progress{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.progress-label{flex:none;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.progress-bars{flex:1;display:flex;gap:6px}
+.progress-bars span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.18);transition:background-color .3s ease}
 .progress-bars span.on{background:var(--accent)}
-.form-nav{display:flex;flex-wrap:wrap;gap:12px}
+.form-nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.form-nav .btn{min-height:48px;padding:0 28px;font-size:16px;border-radius:10px}
+.form-nav [data-next],.form-nav [type="submit"]{margin-left:auto}
+html .invite-dialog.is-done .invite-copy{display:none}
+.status{margin-top:18px}
 .btn-ghost{background:transparent;color:#FFFFFF;border:1px solid var(--line-strong)}
 .btn-ghost:hover{background:rgba(255,255,255,.12);color:#FFFFFF}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form-foot{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px}
+.form-foot{margin-top:28px}
 .fine{font-size:14px;color:var(--muted);max-width:420px}
 .status{margin-top:16px;font-size:15px;color:var(--label)}
 .status.is-error{color:var(--error)}
@@ -202,6 +208,7 @@ select option{color:var(--on-accent);background:#FFFFFF}
 .updated{color:var(--muted);font-size:15px}
 
 @media (max-width:640px){
+  .form-nav .btn:not(.btn-ghost){flex:1}
   .pill-intro{display:none}
   .nav-link{display:none}
   .brand{font-size:22px}
