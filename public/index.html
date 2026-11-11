@@ -64,8 +64,8 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="/styles.css?v=20261116">
-<script src="/main.js?v=20261116" defer></script>
+<link rel="stylesheet" href="/styles.css?v=20261117">
+<script src="/main.js?v=20261117" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -203,38 +203,55 @@
     </div>
     <div class="invite-body">
       <form id="invite-form" novalidate>
-        <div class="fields">
-          <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120">
-          </div>
-          <div class="field">
-            <label for="f-company">Company</label>
-            <input id="f-company" name="company" type="text" autocomplete="organization" required maxlength="160">
-          </div>
-          <div class="field">
-            <label for="f-email">Work email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200">
-          </div>
-          <div class="field">
-            <label for="f-phone">Phone <span class="opt">(optional)</span></label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
-          </div>
-          <div class="field field-full">
-            <label for="f-size">Team size</label>
-            <select id="f-size" name="team_size" required>
-              <option value="">Choose one</option>
-              <option>Under 20 people</option>
-              <option>20 to 50 people</option>
-              <option>51 to 150 people</option>
-              <option>More than 150 people</option>
-            </select>
-          </div>
-          <div class="field field-full">
-            <label for="f-message">What would you most like a fresh set of eyes on? <span class="opt">(optional)</span></label>
-            <textarea id="f-message" name="message" maxlength="2000"></textarea>
-          </div>
+        <div class="progress" id="form-progress" hidden>
+          <p class="progress-label" id="step-label" aria-live="polite">Step 1 of 3</p>
+          <div class="progress-bars" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
         </div>
+        <fieldset class="pane" data-pane="1">
+          <legend class="sr-only">About you</legend>
+          <div class="fields">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120">
+            </div>
+            <div class="field">
+              <label for="f-company">Company</label>
+              <input id="f-company" name="company" type="text" autocomplete="organization" required maxlength="160">
+            </div>
+            <div class="field field-full">
+              <label for="f-email">Work email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="pane" data-pane="2">
+          <legend class="sr-only">Your business</legend>
+          <div class="fields">
+            <div class="field field-full">
+              <label for="f-size">Team size</label>
+              <select id="f-size" name="team_size" required>
+                <option value="">Choose one</option>
+                <option>Under 20 people</option>
+                <option>20 to 50 people</option>
+                <option>51 to 150 people</option>
+                <option>More than 150 people</option>
+              </select>
+            </div>
+            <div class="field field-full">
+              <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="pane" data-pane="3">
+          <legend class="sr-only">What you’d like looked at</legend>
+          <div class="fields">
+            <div class="field field-full">
+              <label for="f-message">What would you most like a fresh set of eyes on? <span class="opt">(optional)</span></label>
+              <textarea id="f-message" name="message" maxlength="2000"></textarea>
+            </div>
+          </div>
+        </fieldset>
         <div class="hp" aria-hidden="true">
           <label for="f-botcheck">Leave this box unticked</label>
           <input id="f-botcheck" type="checkbox" name="botcheck" tabindex="-1">
@@ -246,8 +263,12 @@
         <input type="hidden" name="utm_content">
         <input type="hidden" name="utm_term">
         <div class="form-foot">
-          <button class="btn btn-lg" type="submit">Request an invitation</button>
-          <p class="fine">We use these details only to reply to you. Read our <a href="/privacy">privacy statement</a>.</p>
+          <div class="form-nav">
+            <button class="btn btn-lg btn-ghost" type="button" data-back hidden>Back</button>
+            <button class="btn btn-lg" type="button" data-next hidden>Next</button>
+            <button class="btn btn-lg" type="submit">Request an invitation</button>
+          </div>
+          <p class="fine">We use these details only to reply to you, and nothing is sent until you press the final button. Read our <a href="/privacy">privacy statement</a>.</p>
         </div>
         <p class="status" id="form-status" role="status" aria-live="polite"></p>
       </form>

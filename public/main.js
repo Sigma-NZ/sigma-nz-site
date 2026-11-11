@@ -194,12 +194,72 @@
       status.classList.toggle('is-error', !!isError);
     }
 
+    // ---- Three-step flow. Without JS all three panes simply show at once.
+    var panes = Array.prototype.slice.call(form.querySelectorAll('.pane'));
+    var progress = document.getElementById('form-progress');
+    var label = document.getElementById('step-label');
+    var bars = progress ? progress.querySelectorAll('.progress-bars span') : [];
+    var backBtn = form.querySelector('[data-back]');
+    var nextBtn = form.querySelector('[data-next]');
+    var current = 0;
+    var STEP_ERRORS = [
+      'Please fill in your name, company and a valid work email.',
+      'Please choose your team size.',
+      ''
+    ];
+
+    function showStep(n, moveFocus) {
+      current = n;
+      panes.forEach(function (p, i) { p.hidden = i !== n; });
+      if (label) label.textContent = 'Step ' + (n + 1) + ' of ' + panes.length;
+      Array.prototype.forEach.call(bars, function (b, i) { b.classList.toggle('on', i <= n); });
+      var last = n === panes.length - 1;
+      backBtn.hidden = n === 0;
+      nextBtn.hidden = last;
+      button.hidden = !last;
+      setStatus('', false);
+      if (moveFocus) {
+        var first = panes[n].querySelector('input, select, textarea');
+        if (first) first.focus();
+      }
+    }
+
+    function paneIsValid(n) {
+      var bad = null;
+      Array.prototype.forEach.call(panes[n].querySelectorAll('input, select, textarea'), function (el) {
+        if (!bad && !el.checkValidity()) bad = el;
+      });
+      if (bad) {
+        setStatus(STEP_ERRORS[n] || 'Please check the highlighted field.', true);
+        bad.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function goNext() {
+      if (current < panes.length - 1 && paneIsValid(current)) showStep(current + 1, true);
+    }
+
+    if (panes.length && progress && backBtn && nextBtn) {
+      form.classList.add('is-steps');
+      progress.hidden = false;
+      nextBtn.addEventListener('click', goNext);
+      backBtn.addEventListener('click', function () { if (current > 0) showStep(current - 1, true); });
+      showStep(0, false);
+    }
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      if (form.classList.contains('is-steps') && current < panes.length - 1) { goNext(); return; }
       setStatus('', false);
 
       if (!form.checkValidity()) {
         var firstInvalid = form.querySelector(':invalid');
+        if (form.classList.contains('is-steps') && firstInvalid) {
+          var pane = firstInvalid.closest('.pane');
+          showStep(panes.indexOf(pane), false);
+        }
         setStatus('Please fill in your name, company, work email and team size.', true);
         if (firstInvalid) firstInvalid.focus();
         return;
