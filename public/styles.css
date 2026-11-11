@@ -131,6 +131,16 @@ h1{font-size:clamp(40px,4.8vw,64px);line-height:1.06;font-weight:600;letter-spac
 .trust-item h3{font-size:18px;font-weight:600}
 .trust-item p{font-size:15px}
 
+/* Trust block, desktop: left column and the three items share one height and one rhythm */
+@media (min-width:1100px){
+  .band:has(.trust){padding:clamp(88px,9vw,128px) 0}
+  .trust{align-items:stretch;gap:48px 80px;flex-wrap:nowrap}
+  .trust-head{flex:0 0 360px;justify-content:space-between;gap:12px}
+  .trust-head .btn{margin-top:0}
+  .trust-items{flex:1 1 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;align-items:start}
+  .trust-item{gap:14px}
+}
+
 /* Invitation */
 .invite-dialog{box-sizing:border-box;width:min(960px,calc(100vw - 24px));max-width:none;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);margin:auto;padding:0;overflow:auto;overscroll-behavior:contain;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .invite-dialog::backdrop{background:rgba(3,10,16,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
