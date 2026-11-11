@@ -1,4 +1,4 @@
-/* Sigma NZ: invitation form and lead-source capture. No cookies, no third-party trackers. */
+/* Sigma NZ: invitation dialog and form, lead-source capture, scroll reveals. No cookies, no third-party trackers. */
 (function () {
   'use strict';
 
@@ -58,10 +58,89 @@
     window.location.href = 'mailto:' + CONTACT + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
   }
 
+  // ---- Invitation dialog: every a[href$="#invite"] on this page opens it; so does loading the page with #invite.
+  function initDialog() {
+    var dialog = document.getElementById('invite');
+    if (!dialog || dialog.tagName !== 'DIALOG') return;
+    var root = document.documentElement;
+    var canModal = typeof dialog.showModal === 'function';
+
+    function open() {
+      if (!canModal) { window.location.href = 'mailto:' + CONTACT; return; }
+      if (dialog.open) return;
+      dialog.showModal();
+      root.classList.add('dialog-open');
+    }
+
+    dialog.addEventListener('close', function () {
+      root.classList.remove('dialog-open');
+      if (window.location.hash === '#invite' && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+    // Click on the dimmed backdrop (the dialog element itself, outside its content) closes it.
+    dialog.addEventListener('mousedown', function (e) {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', function () { dialog.close(); });
+    });
+
+    document.querySelectorAll('a[href="#invite"], a[href="/#invite"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        open();
+      });
+    });
+    window.addEventListener('hashchange', function () {
+      if (window.location.hash === '#invite') open();
+    });
+    if (window.location.hash === '#invite') open();
+  }
+
+  // ---- Scroll reveal and step line. Content is visible by default; classes are only added here.
+  function initReveal() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    var steps = document.querySelector('.steps');
+    var items = document.querySelectorAll('.section-head, .card, .trust-head, .trust-item');
+    var stepItems = steps ? steps.querySelectorAll('.step') : [];
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+        if (el.classList.contains('step')) { el.classList.add('drawn'); return; }
+        el.classList.add('in');
+        var done = function (ev) {
+          if (ev.target !== el || ev.propertyName !== 'opacity') return;
+          el.removeEventListener('transitionend', done);
+          el.classList.remove('reveal', 'in');
+        };
+        el.addEventListener('transitionend', done);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+
+    items.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+
+    if (steps && stepItems.length) {
+      steps.classList.add('js-steps');
+      stepItems.forEach(function (el, i) {
+        el.style.setProperty('--d', (i * 0.25) + 's');
+        io.observe(el);
+      });
+    }
+  }
+
   function init() {
     document.querySelectorAll('[data-year]').forEach(function (el) {
       el.textContent = String(new Date().getFullYear());
     });
+
+    initDialog();
+    initReveal();
 
     var form = document.getElementById('invite-form');
     if (!form) return;
