@@ -151,7 +151,7 @@
     }
     function layout() {
       var want = fits();
-      if (want) how.style.setProperty('--pin-h', Math.round(window.innerHeight * 2.8) + 'px');
+      if (want) how.style.setProperty('--pin-h', Math.round(window.innerHeight * 2) + 'px');
       if (want === pinned) { if (pinned) update(); return; }
       if (pinned === null && !want) { pinned = false; stepItems.forEach(function (el) { io.observe(el); }); return; }
       pinned = want;
