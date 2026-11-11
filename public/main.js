@@ -125,13 +125,49 @@
 
     items.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
 
-    if (steps && stepItems.length) {
-      steps.classList.add('js-steps');
+    if (!steps || !stepItems.length) return;
+    steps.classList.add('js-steps');
+
+    // Pinned mode: section sticks while scroll steps through the four steps (and back). Only if it all fits on screen.
+    var how = document.getElementById('how');
+    var head = how.querySelector('.section-head');
+    var pinned = null;
+    var ticking = false;
+
+    function fits() {
+      return head.offsetHeight + 40 + steps.offsetHeight + 96 + 32 <= window.innerHeight;
+    }
+    function update() {
+      ticking = false;
+      if (!pinned) return;
+      var total = how.offsetHeight - window.innerHeight;
+      var p = total > 0 ? Math.min(1, Math.max(0, -how.getBoundingClientRect().top / total)) : 0;
       stepItems.forEach(function (el, i) {
-        el.style.setProperty('--d', (i * 0.25) + 's');
-        io.observe(el);
+        el.classList.toggle('drawn', p >= i * 0.22);
       });
     }
+    function onScroll() {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }
+    function layout() {
+      var want = fits();
+      if (want) how.style.setProperty('--pin-h', Math.round(window.innerHeight * 2.8) + 'px');
+      if (want === pinned) { if (pinned) update(); return; }
+      if (pinned === null && !want) { pinned = false; stepItems.forEach(function (el) { io.observe(el); }); return; }
+      pinned = want;
+      how.classList.toggle('pin', pinned);
+      stepItems.forEach(function (el, i) {
+        el.style.setProperty('--d', pinned ? '0s' : (i * 0.32) + 's');
+        if (pinned) io.unobserve(el); else { el.classList.remove('drawn'); io.observe(el); }
+      });
+      if (pinned) update();
+    }
+    stepItems.forEach(function (el, i) { el.style.setProperty('--d', (i * 0.32) + 's'); });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 150); });
+    window.addEventListener('load', layout);
+    layout();
   }
 
   function init() {
